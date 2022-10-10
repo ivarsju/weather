@@ -9,7 +9,15 @@ use Doctrine\Common\Collections\Collection;
 class WeatherItems
 {
     /**
-     * @var Collection<int, WeatherItem>
+     * @param Collection<int, WeatherItem> $items
      */
-    public Collection $items;
+    public function __construct(private Collection $items) {}
+
+    /**
+     * @return Collection<int, WeatherItem>
+     */
+    public function getItems(): Collection
+    {
+        return $this->items;
+    }
 }

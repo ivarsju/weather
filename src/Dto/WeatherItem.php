@@ -8,10 +8,12 @@ use DateTime;
 
 class WeatherItem
 {
-    public string $city;
-    public DateTime $date;
-    public int $temperature;
-    public int $windSpeed;
+    public function __construct(
+        private readonly string   $city,
+        private readonly DateTime $date,
+        private readonly int      $temperature,
+        private readonly int      $windSpeed
+    ) {}
 
     public function getCity(): string
     {
