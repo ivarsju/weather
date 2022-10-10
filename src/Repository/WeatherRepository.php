@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Weather;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -63,4 +64,16 @@ class WeatherRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+    public function findByCityAndDateRange(string $city, DateTime $dateFrom, DateTime $dateTo): array
+    {
+        return $this->createQueryBuilder('w')
+            ->where('w.city = :city')
+            ->andWhere('w.date >= :dateFrom')
+            ->andWhere('w.date <= :dateTo')
+            ->setParameter('city', $city)
+            ->setParameter('dateFrom', $dateFrom)
+            ->setParameter('dateTo', $dateTo)
+            ->getQuery()
+            ->getResult();
+    }
 }
